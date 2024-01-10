@@ -1,4 +1,4 @@
-name: calling the another workflow
+name: Calling the Another Workflow
 
 on:
   workflow_dispatch:
@@ -8,4 +8,25 @@ jobs:
     uses: alamzia23/hello-world/.github/workflows/main.yml@main
     permissions:
       issues: read
-      pull-requests: read  # Add these permissions
+      pull-requests: read  # Ensure necessary permissions
+
+    # Accessing index.mjs from another repository:
+    - uses: actions/checkout@v3  # Checkout the other repository
+      with:
+        repository: alamzia23/hello-world  # Specify the repository name
+        path: actions/ListofPRs  # Checkout only the relevant directory
+
+    # Assuming index.mjs is a Node.js module:
+    - uses: actions/setup-node@v3  # Set up Node.js environment
+      with:
+        node-version: 18
+
+    # Run the module:
+    - name: Check comments
+      working-directory: ./actions/ListofPRs  # Specify correct working directory
+      run: node index.mjs
+
+    # Additional recommendations:
+    - env:  # Define environment variables if needed
+        TOKEN_KEY: ${{ secrets.TOKEN_KEY }}  # Example: Pass a secret for API calls
+    - run: npm install  # Install dependencies if required
