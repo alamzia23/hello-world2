@@ -1,37 +1,36 @@
-name: Calling Another Workflow
+name: Tested Comment Checker for Merged PRs
+reusable: true
 
 on:
-  workflow_dispatch:
+  push:
+  workflow_call:
 
 jobs:
-  call-workflow-using-branch:
-    uses: alamzia23/hello-world/.github/workflows/main.yml
+  check_merged_pr_comments:
+    runs-on: ubuntu-latest
+
     permissions:
       issues: read
-      pull-requests: read  # Ensure necessary permissions
+      pull-requests: read
 
-    # Accessing index.mjs from another repository:
-    - name: Checkout Another Repository
-      uses: actions/checkout@v3
-      with:
-        repository: alamzia23/hello-world  # Specify the repository name
-        path: actions/ListofPRs  # Checkout only the relevant directory
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Your preferred Node.js version
+      - run: npm install @actions/core @octokit/rest  # Install dependencies
 
-    # Assuming index.mjs is a Node.js module:
-    - name: Set up Node.js Environment
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Check for tested comments in merged PRs
+        id: check_comments
+        run: |
+          node ./actions/ListofPRs/index.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_KEY }}
 
-    # Run the module:
-    - name: Check comments
-      working-directory: ./actions/ListofPRs  # Specify correct working directory
-      run: node index.mjs
-
-    # Additional recommendations:
-    - name: Set up Environment Variables
-      env:
-        TOKEN_KEY: ${{ secrets.TOKEN_KEY }}  # Example: Pass a secret for API calls
-
-    - name: Install Dependencies
-      run: npm install  # Install dependencies if required
+      - name: Process filtered comments
+        if: steps.check_comments.outputs.filtered_comments
+        run: |
+          echo "Found ${{ steps.check_comments.outputs.filtered_comments.length }} comments containing 'TESTED' in merged PR:"
+          for comment in ${{ steps.check_comments.outputs.filtered_comments }}; do
+            echo "- ${comment.body}"
+          done
