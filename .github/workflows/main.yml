@@ -1,0 +1,9 @@
+name: calling the another workflow
+
+on:
+   workflow_dispatch:
+
+jobs:
+
+  call-workflow-using-branch:
+    uses: alamzia23/hello-world/.github/workflows/main.yml@main
