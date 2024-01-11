@@ -1,13 +1,12 @@
 name: Calling another workflow in alamzia23/hello-world
 
 on:
-  push:
-    branches: [ main ]
+ push:
+  branches: [ main ]
 
 jobs:
-  call-other-workflow:
-  
-     runs-on: runner-label
+ call-other-workflow:
+  
+   runs-on: runner-label
 
-      uses: alamzia23/hello-world/.github/workflows/main.yml@main
-
+   uses: alamzia23/hello-world/.github/workflows/main.yml@main
