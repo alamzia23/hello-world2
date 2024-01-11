@@ -1,9 +1,24 @@
 name: Calling another workflow in alamzia23/hello-world
-'on':
+
+on:
   push:
     branches:
       - main
+
 jobs:
   call-other-workflow:
-    runs-on: runner-label
-    uses: alamzia23/hello-world/.github/workflows/main.yml@main
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Another Workflow
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Trigger Workflow
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.TOKEN_KEY }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/alamzia23/hello-world/actions/workflows/main.yml/dispatches \
+            -d '{"ref":"main"}'
