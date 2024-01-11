@@ -1,4 +1,4 @@
-name: Tested Comment Checker for Merged PRs
+name: Calling another workflow
 
 
 on:
