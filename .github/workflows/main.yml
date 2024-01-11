@@ -18,7 +18,7 @@ jobs:
       - name: Trigger Workflow
         run: |
           curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.TOKEN_KEY }}" \
+            -H "Authorization: Bearer ${{ TOKEN_KEY }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/alamzia23/hello-world/actions/workflows/main.yml/dispatches \
             -d '{"ref":"main"}'
