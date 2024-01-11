@@ -7,8 +7,7 @@ on:
 jobs:
   call-other-workflow:
     runs-on: ubuntu-latest
-    uses: .github/workflows/main.yml@main # Move the `uses` here
+    uses: alamzia23/hello-world/.github/workflows/main.yml@main  # Updated reference
 
     steps:
-      - uses: actions/checkout@v3 # Other steps remain within the `steps` section
-
+      - uses: actions/checkout@v3
