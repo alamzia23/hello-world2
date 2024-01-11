@@ -6,6 +6,8 @@ on:
 
 jobs:
   call-other-workflow:
-   
-    uses: alamzia23/hello-world/.github/workflows/main.yml@main
+  
+     runs-on: runner-label
+
+      uses: alamzia23/hello-world/.github/workflows/main.yml@main
 
