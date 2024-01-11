@@ -1,5 +1,5 @@
 name: Tested Comment Checker for Merged PRs
-reusable: true
+
 
 on:
   push:
