@@ -1,4 +1,4 @@
-name: Calling another workflow in alamzia23/hello-world
+name: Calling another workflow from alamzia23/hello-world
 
 on:
   push:
