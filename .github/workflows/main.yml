@@ -8,5 +8,6 @@ on:
 jobs:
    my-job:
      steps:
-       - uses: alamzia23/hello-world/.github/workflows/mail.yml  
+       - uses: alamzia23/hello-world/.github/workflows/mail.yml@main  
+
 
