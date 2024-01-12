@@ -7,5 +7,5 @@ on:
 
 jobs:
   my-job:
-    uses: alamzia23/hello-world/.github/workflows/mail.yml@main  # Correct placement
+    uses: alamzia23/hello-world/.github/workflows/main.yml@main  # Correct placement
   
