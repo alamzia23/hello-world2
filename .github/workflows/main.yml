@@ -6,8 +6,13 @@ on:
       - main
 
 jobs:
-  my-job:
-    uses: alamzia23/hello-world/.github/workflows/main.yml@main
+  install-dependencies:
+    runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
         run: npm install @actions/github
+
+  my-job:
+    needs: install-dependencies
+    uses: alamzia23/hello-world/.github/workflows/main.yml@main
+
