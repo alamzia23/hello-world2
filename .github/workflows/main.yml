@@ -7,6 +7,9 @@ on:
 
 jobs:
   my-job:
-    uses: alamzia23/hello-world/.github/workflows/main.yml@main  # Correct placement
-    
-  
+    steps:
+      - name: Install dependencies  # New step to install the package
+        run: npm install @actions/github
+
+      - name: Calling another workflow
+        uses: alamzia23/hello-world/.github/workflows/main.yml@main
