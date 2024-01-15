@@ -8,4 +8,6 @@ on:
 jobs:
   my-job:
     uses: alamzia23/hello-world/.github/workflows/main.yml@main  # Correct placement
+    with:
+        repo-token: ${{ secrets.TOKEN_KEY }}
   
