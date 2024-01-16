@@ -1,6 +1,6 @@
-import { Octokit } from '@octokit/rest';
-import * as core from '@actions/core';
-import * as actions from '@actions/github';
+import { Octokit } from '@octokit/rest.js';
+import * as core from '@actions/core.js';
+import * as actions from '@actions/github.js';
 
 const context = actions.context;
 
